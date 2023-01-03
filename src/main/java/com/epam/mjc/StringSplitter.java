@@ -17,9 +17,12 @@ public class StringSplitter {
      */
     public List<String> splitByDelimiters(String source, Collection<String> delimiters) {
         String reducedDelimiters = delimiters.stream().reduce("", String::concat);
-        String[] result = source.split(("[" + reducedDelimiters + "]+"));
-
-        return Arrays.stream(result).collect(Collectors.toList());
-
+        String[] result = source.split(("[" + reducedDelimiters + "]"));
+        List<String> splited = new ArrayList<>();
+        Arrays.stream(result).forEach(word -> {
+            if (word.length() > 0) splited.add(word);
+        });
+        return splited;
     }
+
 }
